@@ -1,44 +1,78 @@
+import { updateNote } from "@/lib/supabase/notes.service";
 import {
   StrikethroughOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { useParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import styles from "./style.module.scss";
-
-type Props = {
-  pageContent: string;
-  setPageContent: Dispatch<SetStateAction<string>>;
-};
 
 export default function PageEditorComponent({
   pageContent,
   setPageContent,
-}: Props) {
+  isLoading,
+}: any) {
+  const { id = "" } = useParams();
+  const saveTimerRef = useRef<NodeJS.Timeout | null>(null); // Timer reference for auto-save
+  const [isSaving, setIsSaving] = useState(false); // Track save state
+
   const editor = useEditor({
     extensions: [StarterKit],
-    content: pageContent, // Initialize with the passed content
+    content: pageContent,
     editorProps: {
       attributes: {
         style: "min-height: calc(100vh - 40rem); border:none; outline: none;",
       },
     },
     onUpdate: ({ editor }) => {
-      setPageContent(editor.getHTML()); // Update state with the new HTML content
+      const content = editor.getHTML();
+      setPageContent(content);
     },
   });
 
-  // Clean up the editor instance when the component unmounts
+  // Function to save the note
+  const saveNote = async () => {
+    if (!id || typeof id !== "string" || !pageContent) return;
+    try {
+      setIsSaving(true);
+      await updateNote(id, pageContent);
+    } catch (err: any) {
+      console.error("Auto-save failed:", err.message);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  // Auto-save on blur
+  const handleBlur = () => {
+    saveNote();
+  };
+
+  // Auto-save every 5 seconds if content changes
+  useEffect(() => {
+    if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+    saveTimerRef.current = setTimeout(() => {
+      saveNote();
+    }, 5000);
+
+    return () => {
+      if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+    };
+  }, [pageContent]); // Restart timer whenever pageContent changes
+
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
       editor?.destroy();
+      if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     };
   }, [editor]);
 
   return (
     <div className={styles.editorWrapper}>
-      <EditorContent editor={editor} />
+      <EditorContent editor={editor} onBlur={handleBlur} />
       <div className={styles.toolsContainer}>
         {editor && (
           <div className="flex flex-col gap-2">
@@ -101,6 +135,7 @@ export default function PageEditorComponent({
             </div>
           </div>
         )}
+        {isSaving && <p className="text-gray-500">Saving...</p>}
       </div>
     </div>
   );
