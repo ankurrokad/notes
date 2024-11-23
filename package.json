@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.1",
-    "@next/font": "^14.2.15",
     "antd": "^5.22.2",
     "next": "15.0.3",
+    "next-pwa": "^5.6.0",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "sass": "^1.81.0"
