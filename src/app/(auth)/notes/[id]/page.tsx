@@ -26,8 +26,8 @@ export default function NotePage() {
           const note = await fetchNoteById(id);
           setNote(note);
           setPageContent(note.content);
-        } catch (err: any) {
-          console.error("Failed to load note content:", err.message);
+        } catch (err) {
+          console.error("Failed to load note content:", err);
         } finally {
           setIsLoading(false);
         }
@@ -59,7 +59,6 @@ export default function NotePage() {
           <PageEditorComponent
             pageContent={pageContent}
             setPageContent={setPageContent}
-            isLoading={isLoading}
           />
         )}
       </div>

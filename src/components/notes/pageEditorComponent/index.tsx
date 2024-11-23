@@ -12,8 +12,10 @@ import styles from "./style.module.scss";
 export default function PageEditorComponent({
   pageContent,
   setPageContent,
-  isLoading,
-}: any) {
+}: {
+  pageContent: string;
+  setPageContent: React.Dispatch<React.SetStateAction<string>>;
+}) {
   const { id = "" } = useParams();
   const saveTimerRef = useRef<NodeJS.Timeout | null>(null); // Timer reference for auto-save
   const [isSaving, setIsSaving] = useState(false); // Track save state
@@ -38,8 +40,8 @@ export default function PageEditorComponent({
     try {
       setIsSaving(true);
       await updateNote(id, pageContent);
-    } catch (err: any) {
-      console.error("Auto-save failed:", err.message);
+    } catch (err) {
+      console.error("Auto-save failed:", err);
     } finally {
       setIsSaving(false);
     }

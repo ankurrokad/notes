@@ -1,6 +1,5 @@
 import { fetchAllNotes } from "@/lib/supabase/notes.service";
 import { ModelNote } from "@/types/notes";
-import { message } from "antd";
 import {
   createContext,
   Dispatch,
@@ -13,6 +12,8 @@ import {
 } from "react";
 
 interface NotesContextDataType {
+  isLoading: boolean;
+
   notes: ModelNote[];
   setNotes: Dispatch<SetStateAction<ModelNote[]>>;
 
@@ -35,8 +36,8 @@ export const NotesContextDataProvider: FC<{ children: ReactNode }> = ({
       try {
         const data = await fetchAllNotes();
         setNotes(data);
-      } catch (err: any) {
-        message.error(err.message);
+      } catch (err) {
+        console.error(err);
       } finally {
         setIsLoading(false);
       }
@@ -48,6 +49,7 @@ export const NotesContextDataProvider: FC<{ children: ReactNode }> = ({
   return (
     <NotesData.Provider
       value={{
+        isLoading,
         notes,
         setNotes,
         selectedNote,
