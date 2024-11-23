@@ -1,0 +1,8 @@
+{
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "editor.fontLigatures": true,
+  "typescript.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  }
+}
