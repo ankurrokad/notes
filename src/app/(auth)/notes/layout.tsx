@@ -10,7 +10,7 @@ export default function NotePageLayout({ children }: { children: ReactNode }) {
         <div className="w-1/5 p-4">
           <NotesLayoutSidebar />
         </div>
-        <div className="w-4/5 p-4">{children}</div>
+        <div className="w-4/5">{children}</div>
       </div>
     </NotesContextDataProvider>
   );

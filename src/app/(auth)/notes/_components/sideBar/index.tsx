@@ -4,7 +4,6 @@ import Link from "next/link";
 
 export default function NotesLayoutSidebar() {
   const { notes } = useNotesContextProvider();
-  const { setSelectedNote } = useNotesContextProvider();
   return (
     <div className="flex flex-col gap-2">
       <div className="text-2xl font-bold">
@@ -17,7 +16,6 @@ export default function NotesLayoutSidebar() {
               <Link
                 href={`/notes/${note.id}`}
                 className="hover:underline flex items-center gap-2 p-2"
-                onClick={() => setSelectedNote(note)}
               >
                 <FileTextOutlined />
                 {note.title}

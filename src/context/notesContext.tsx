@@ -44,8 +44,8 @@ export const NotesContextDataProvider: FC<{ children: ReactNode }> = ({
       note: "",
     },
   ]);
-
   const [selectedNote, setSelectedNote] = useState<ModelNote | null>(null);
+
   return (
     <NotesData.Provider
       value={{
