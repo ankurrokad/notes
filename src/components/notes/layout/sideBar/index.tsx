@@ -5,11 +5,11 @@ import Link from "next/link";
 export default function NotesLayoutSidebar() {
   const { notes } = useNotesContextProvider();
   return (
-    <div className="flex flex-col gap-2">
-      <div className="text-2xl font-bold">
+    <div className="flex flex-col gap-2 p-4">
+      <div className="text-4xl font-bold">
         <Link href={`/notes`}>Home</Link>
       </div>
-      <div className="border-r">
+      <div className="border-r p-2">
         {notes.map((note, index) => {
           return (
             <div key={index} className="text-lg flex">
