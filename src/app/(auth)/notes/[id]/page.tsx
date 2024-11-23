@@ -12,7 +12,7 @@ export default function NotePage() {
         <div className="text-gray-500">Saving</div>
       </div>
       {/* Body */}
-      <div className="p-4">
+      <div className="p-4 select-text">
         <PageEditorComponent />
       </div>
     </div>
