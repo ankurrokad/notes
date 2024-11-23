@@ -9,7 +9,7 @@ export default function NotePageLayout({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const handlePageChange = () => {
-      const note = notes.find((note) => note.id === Number(id));
+      const note = notes.find((note) => note.id === id);
       if (note) {
         setSelectedNote(note);
       }
