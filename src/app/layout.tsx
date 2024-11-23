@@ -3,8 +3,8 @@ import "../styles/globals.scss";
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "600", "700"], // Include the font weights you need
-  variable: "--font-poppins", // Optional: for CSS custom property
+  weight: ["400", "500", "600", "700"], // Include the weights you want
+  variable: "--font-poppins",
 });
 
 export const metadata = {

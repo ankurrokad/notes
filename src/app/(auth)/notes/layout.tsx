@@ -1,7 +1,7 @@
 "use client";
 import { NotesContextDataProvider } from "@/context/notesContext";
 import { ReactNode } from "react";
-import NotesLayoutSidebar from "./_components/sideBar";
+import NotesLayoutSidebar from "../../../components/notes/layout/sideBar";
 
 export default function NotePageLayout({ children }: { children: ReactNode }) {
   return (

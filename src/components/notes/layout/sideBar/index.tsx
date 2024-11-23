@@ -12,7 +12,7 @@ export default function NotesLayoutSidebar() {
       <div className="border-r">
         {notes.map((note, index) => {
           return (
-            <div key={index} className="text-lg">
+            <div key={index} className="text-lg flex">
               <Link
                 href={`/notes/${note.id}`}
                 className="hover:underline flex items-center gap-2 p-2"
