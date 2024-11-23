@@ -39,7 +39,7 @@ export default function NotePage() {
   return (
     <div className="flex flex-col gap-2">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between border-b pb-4">
         <div className="text-4xl font-bold">
           <div>{note?.title}</div>
         </div>
