@@ -2,10 +2,10 @@
 
 .editorWrapper {
   position: relative;
-  background-color: var(--background-color);
   border-radius: 0.75rem;
 
-  //   padding: 1rem;
+  height: calc(100vh - 160px);
+  overflow-y: auto;
 
   /* Headings */
   h1,

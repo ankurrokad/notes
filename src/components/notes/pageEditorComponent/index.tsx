@@ -25,7 +25,7 @@ export default function PageEditorComponent({
     content: pageContent,
     editorProps: {
       attributes: {
-        style: "min-height: calc(100vh - 40rem); border:none; outline: none;",
+        style: "border:none; outline: none;",
       },
     },
     onUpdate: ({ editor }) => {
@@ -73,8 +73,10 @@ export default function PageEditorComponent({
   }, [editor]);
 
   return (
-    <div className={styles.editorWrapper}>
-      <EditorContent editor={editor} onBlur={handleBlur} />
+    <div className="h-full flex flex-col gap-2">
+      <div className={styles.editorWrapper}>
+        <EditorContent editor={editor} onBlur={handleBlur} />
+      </div>
       <div className={styles.toolsContainer}>
         {editor && (
           <div className="flex flex-col gap-2">
