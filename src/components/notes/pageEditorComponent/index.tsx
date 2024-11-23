@@ -25,7 +25,7 @@ export default function PageEditorComponent({
     content: pageContent,
     editorProps: {
       attributes: {
-        style: "border:none; outline: none;",
+        style: "border:none; outline: none; border-bottom: 0.1px solid #ccc",
       },
     },
     onUpdate: ({ editor }) => {

@@ -1,6 +1,7 @@
 // services/notesService.ts
 
 import { supabase } from "@/lib/supabase";
+import { ModelNote } from "@/types/notes";
 
 /**
  * Fetches all notes from the Supabase database.
@@ -57,4 +58,28 @@ export const fetchNoteById = async (noteId: string) => {
   }
 
   return data; // Returns the fetched note object
+};
+
+/**
+ * Creates a new note in the Supabase database.
+ * @param title - The title of the note.
+ * @param content - The content of the note.
+ * @returns A promise resolving to the created note object or an error.
+ */
+export const createNote = async (
+  title: string,
+  content: string
+): Promise<ModelNote[]> => {
+  const { data, error } = await supabase
+    .from("notes")
+    .insert([{ title, content }])
+    .select();
+  if (data) {
+    return data as ModelNote[];
+  } else if (error) {
+    console.error("Error creating note:", error.message);
+    throw new Error(error.message);
+  } else {
+    return [];
+  }
 };
