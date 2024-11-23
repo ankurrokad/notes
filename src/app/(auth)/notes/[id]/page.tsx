@@ -1,9 +1,8 @@
-"use client"
-import { useParams } from "next/navigation"
+"use client";
+import { useNotesContextProvider } from "@/context/notesContext";
+import { useParams } from "next/navigation";
 
 export default function NotePage() {
-    const { id } = useParams()
-    return <div>
-        {id}
-    </div>
+  const { selectedNote } = useNotesContextProvider();
+  return <div>{selectedNote?.title}</div>;
 }
