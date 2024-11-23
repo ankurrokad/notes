@@ -1,0 +1,59 @@
+// tickerNotesModal.module.scss
+
+.editorWrapper {
+  position: relative;
+  background-color: var(--background-color);
+  border-radius: 0.75rem;
+
+  //   padding: 1rem;
+
+  /* Headings */
+  h1,
+  h2,
+  h3 {
+    line-height: 1.1;
+    text-wrap: pretty;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  /* Unordered Lists */
+  ul,
+  ol {
+    padding-left: 1.5rem; /* Added enough padding to show list markers properly */
+    margin: 1.25rem 1rem 1.25rem 0.4rem;
+    list-style-type: circle; /* Ensure bullet points for ul */
+    list-style-position: outside; /* Ensures markers are outside the content box */
+  }
+
+  li p {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+  }
+}
+
+.toolsContainer {
+  color: #dcdcdc;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  border-left: #dcdcdd 4px solid;
+  padding-left: 10px;
+
+  // padding: 0 1rem;
+}
