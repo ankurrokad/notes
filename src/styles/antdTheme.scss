@@ -1,0 +1,22 @@
+.ant-input {
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  border-radius: 0;
+
+  &:focus {
+    border-bottom: 1px solid var(--foreground) !important;
+  }
+}
+
+/* Style the placeholder text */
+.ant-input::placeholder {
+  color: var(--foreground) !important;
+  opacity: 1; /* Ensure it's fully visible */
+}
+
+.anticon {
+  cursor: pointer;
+}
