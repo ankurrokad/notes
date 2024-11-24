@@ -7,12 +7,12 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "A simple note-taking app.",
     start_url: "/",
     display: "standalone",
-    background_color: "var(--background)",
-    theme_color: "var(--background)",
+    background_color: "#ffffff",
+    theme_color: "#000000",
     icons: [
       {
         src: "/icons/icon-512x512.png",
-        sizes: "512x512",
+        sizes: "1024x1024",
         type: "image/png",
       },
     ],
