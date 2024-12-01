@@ -66,14 +66,6 @@ export default function NotesLayoutSidebar() {
           )}
         </div>
       </div>
-      <div className="text-lg flex">
-        <Link
-          href={`/notes/counter`}
-          className="hover:underline flex items-center gap-2 p-2"
-        >
-          Counter
-        </Link>
-      </div>
     </div>
   );
 }

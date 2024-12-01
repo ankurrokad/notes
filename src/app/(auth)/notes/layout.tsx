@@ -11,7 +11,7 @@ export default function NotePageLayout({ children }: { children: ReactNode }) {
 
   return (
     <NotesContextDataProvider>
-      <div className="flex p-4 h-screen w-full">
+      <div className="flex p-4 w-full">
         {isMobile ? (
           <>
             {!id && ( // Only show sidebar if no note is selected

@@ -4,7 +4,6 @@
   position: relative;
   border-radius: 0.75rem;
 
-  height: calc(100vh - 180px);
   overflow-y: auto;
 
   /* Headings */
@@ -56,4 +55,12 @@
   padding-left: 10px;
 
   // padding: 0 1rem;
+}
+
+.editor {
+  height: 75vh; // Default height for web
+
+  @media (max-width: 768px) {
+    height: 60vh; // Height for phones
+  }
 }

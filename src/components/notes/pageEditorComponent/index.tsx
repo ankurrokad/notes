@@ -25,7 +25,8 @@ export default function PageEditorComponent({
     content: pageContent,
     editorProps: {
       attributes: {
-        style: "min-height: 350px; border:none; outline: none;",
+        class: styles.editor || "",
+        style: "border:none; outline: none;",
       },
     },
     onUpdate: ({ editor }) => {
@@ -71,6 +72,21 @@ export default function PageEditorComponent({
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     };
   }, [editor]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.key === "s") {
+        event.preventDefault(); // Prevent the browser's save action
+        saveNote(); // Call the save function
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <div className="h-full flex flex-col gap-2">
