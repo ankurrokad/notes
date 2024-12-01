@@ -1,13 +1,4 @@
 module.exports = {
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/notes",
-        permanent: true,
-      },
-    ];
-  },
   async headers() {
     return [
       {
