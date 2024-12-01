@@ -3,6 +3,7 @@ import {
   StrikethroughOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
+import Link from "@tiptap/extension-link";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useParams } from "next/navigation";
@@ -17,16 +18,37 @@ export default function PageEditorComponent({
   setPageContent: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const { id = "" } = useParams();
-  const saveTimerRef = useRef<NodeJS.Timeout | null>(null); // Timer reference for auto-save
-  const [isSaving, setIsSaving] = useState(false); // Track save state
+  const saveTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
 
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      Link.configure({
+        openOnClick: false,
+        linkOnPaste: true,
+        autolink: true,
+        HTMLAttributes: {
+          target: "_blank",
+          rel: "noopener noreferrer",
+        },
+      }),
+    ],
     content: pageContent,
     editorProps: {
       attributes: {
         class: styles.editor || "",
         style: "border:none; outline: none;",
+      },
+      handleClickOn(view, pos, node) {
+        if (node.type.name === "link") {
+          const { href } = node.attrs;
+          if (href) {
+            window.open(href, "_blank");
+            return true;
+          }
+        }
+        return false;
       },
     },
     onUpdate: ({ editor }) => {
@@ -35,7 +57,6 @@ export default function PageEditorComponent({
     },
   });
 
-  // Function to save the note
   const saveNote = async () => {
     if (!id || typeof id !== "string" || !pageContent) return;
     try {
@@ -48,12 +69,10 @@ export default function PageEditorComponent({
     }
   };
 
-  // Auto-save on blur
   const handleBlur = () => {
     saveNote();
   };
 
-  // Auto-save every 5 seconds if content changes
   useEffect(() => {
     if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     saveTimerRef.current = setTimeout(() => {
@@ -63,9 +82,8 @@ export default function PageEditorComponent({
     return () => {
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     };
-  }, [pageContent]); // Restart timer whenever pageContent changes
+  }, [pageContent]);
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       editor?.destroy();
@@ -76,8 +94,8 @@ export default function PageEditorComponent({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.ctrlKey && event.key === "s") {
-        event.preventDefault(); // Prevent the browser's save action
-        saveNote(); // Call the save function
+        event.preventDefault();
+        saveNote();
       }
     };
 
